@@ -6,6 +6,7 @@ const path = require('path');
 
 //Inicializaciones
 const app = express();
+require('./database'); //Requerimos el módulo que está en database
 
 //Configuración
 app.set('port', 3000); //puerto a utilizar
@@ -23,7 +24,14 @@ app.use(multer({storage}).single('image'));
 
 //Cuando tengamos un formulario del frontend, con urlencoded podremos interpretar los datos como sifueran un json
 app.use(express.urlencoded({extended: false}));
-app.use(express.json();)
+app.use(express.json());
+
+//Routes
+app.use('/api/books', require('./routes/books')); //Api no es más que rutas de un servidor
+
+//Static files
+app.use(express.static(path.join(__dirname, 'public'))); //concatenamos la carpeta actual con la carpeta public
+
 
 //Empezar el servidos
 app.listen(app.get('port'), () => {
