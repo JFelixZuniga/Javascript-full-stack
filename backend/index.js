@@ -1,15 +1,25 @@
+if(process.env.NODE_ENV !== 'production'){
+  //Con esta línea podemos leer nuestros archivos .env
+  require('dotenv').config();
+
+}
+
 const express = require('express');
 //Morgan nos permite ver por consola lo que las aplicaciones cliente van solicitando
 const morgan = require('morgan');
+
+const cors = require('cors');
+
 const multer = require('multer');
 const path = require('path');
+
 
 //Inicializaciones
 const app = express();
 require('./database'); //Requerimos el módulo que está en database
 
 //Configuración
-app.set('port', 3000); //puerto a utilizar
+app.set('port', process.env.PORT || 3000); //puerto a utilizar
 
 //Middleware: software que asiste a una app para interactuar o comunicarse con otras aplicaciones
 app.use(morgan('dev'));
