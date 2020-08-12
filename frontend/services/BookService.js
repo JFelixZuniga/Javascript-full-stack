@@ -1,35 +1,35 @@
 class BookService {
-
-  constructor() {
-    this.URI = `/api/books`;
-    }
-
-  //Métodos para interactuar con el bankend
-  //Método para obtener todos los libros
-  async getBooks(){
-    //Acá hace una petición GET al backend api/books
-    const response = await fetch(this.URI); //Esto entrega un String, el cual debemos convertirlo
-    const books = await response.json();
-    return books; 
+  constructor(){
+    this.URI = 'http://localhost:3000/api/books';
   }
-  //Método para guardar libros
-  async postBook(book) {
+
+  //En la siguiente sección creamos los métodos para interactuar con el backend
+  async getBooks(){
+    //acá hacemos una petición GET a la dirección api/books para recuperar los datos, como es una petición que puede demorar, lo manejamos con async await
+    const response = await fetch(this.URI);
+    const books = await response.json();
+    return books;
+  }
+  //Acá hacemos una petición POST, para enviar los datos al backend al registrar un libro   
+  async postBook(book){
+    //Aquí gestionamos unas cabeceras, las cuales son información extra para decirle al backend que datos le estoy enviando
     const res = await fetch(this.URI, {
-        method: 'POST',
-        body: book
+      method: 'POST',
+      body: book
     });
+    //Convertimos los datos a formato json
     const data = await res.json();
-}
-  //Método para eliminar un libro
-  async deleteBook(bookId) {
+    console.log(data)
+  }
+  async deleteBook(bookId){
     const res = await fetch(`${this.URI}/${bookId}`, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method: 'Delete'
-    });
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+    })
     const data = await res.json();
-    console.log(data);
+    console.log(data)
   }
 }
 

@@ -5,8 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
-
-//Exportamos el objeto para especificar en donde está el proyecto de frontend de desarrollo y en donde quiero que lo coloque
+console.log(devMode);
+// //Exportamos el objeto para especificar en donde está el proyecto de frontend de desarrollo y en donde quiero que lo coloque
 module.exports = {
   //Para decir donde está mi archivo principal del frontend
   entry:'./frontend/app.js',
@@ -15,7 +15,8 @@ module.exports = {
     path: path.join(__dirname, 'backend/public'),
     filename: 'js/bundle.js'
   },
-  mode: 'development',
+
+  mode: 'production',
 
   module:{
     rules: [

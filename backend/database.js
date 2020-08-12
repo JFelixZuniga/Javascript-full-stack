@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
+//const { Collection } = require('mongoose');
 
-//El método connect recibe un parámetro que es la cádena de conexión
+// //El método connect recibe el parámetro que es la cadena de conexión
 mongoose.connect(process.env.MONGODB_URI, {
-   //useUnifiedTopology: true,
-   useNewUrlParser: true,
- }) 
-    //unavez logre conectarse, puede dar 2 eventos:
-    //Uno satisfactorio, que capturo con .then o un error que capturo con .catch
-    //Si es satisfactorio voy a tener un objeto llamado db
-    .then(db => console.log(`DB is connected`))
-    .catch(err => console.log('Error'));
-   
+  useNewUrlParser: true
+})
+  .then(db => console.log('DB está conectado'))
+  .catch(err => console.error(err));
+/* 
+* una vez logre conectarse, puede dar 2 eventos:
+* Uno satisfactorio, el cual capturo con .then o un error que capturo con .catch
+* Si es satisfactorio, tendremos un objeto llamado db.
+*/

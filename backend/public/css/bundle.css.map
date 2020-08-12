@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"css/bundle.css","sourceRoot":""}
+{"version":3,"sources":["webpack:///app.css"],"names":[],"mappings":"AAAA;EACE,yBAAyB;AAC3B,C","file":"css/bundle.css","sourcesContent":["body{\r\n  background-color: #f5f6fa;\r\n}"],"sourceRoot":""}

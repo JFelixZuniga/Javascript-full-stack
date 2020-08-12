@@ -1,50 +1,61 @@
 import './styles/app.css';
 
-import UI from './UI';
+import BookService from './services/BookService';
+// import Book from './models/Book.js';
+import UI from './UI.js';
 
-//Una vez el DOM haya sido cargado,se trae los datos del backend
+//Una vez el DOM haya sido cargado, traerá los datos del backend
 document.addEventListener('DOMContentLoaded', () => {
-  //Una vez cargue el DON, instaciamos UI
   const ui = new UI();
   ui.renderBooks();
 });
 
+
 document.getElementById('book-form')
-  .addEventListener('submit', function(e) {
+  .addEventListener('submit', e => {
+
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const isbn = document.getElementById('isbn').value;
     const image = document.getElementById('image').files;
-    
-    //Capturamos todos los datos en uno solo
+    //console.log(title, author, isbn, image)
+
     const formData = new FormData();
     formData.append('image', image[0]);
     formData.append('title', title);
     formData.append('author', author);
     formData.append('isbn', isbn);
 
+//     // for(var pair of formData.entries()) {
+//     //   console.log(pair[0]+', '+pair[1]);
+//     // }
+
+//     // Instatiating the UI
     const ui = new UI();
-    
-    const book = new Book(title, author, isbn);
+    ui.addANewBook(formData);
 
-    if (title === '' || author === '' || isbn === '') {
-      ui.renderMessage('Please fill all the fields', 'error', 3000);
-    } else {
-      // Pass the new book to the UI
-      ui.addANewBook(formData);
-      ui.renderMessage('New Book Added Successfully', 'success', 2000);
-    }
+//     // New Book Object
+//     const book = new Book(title, author, isbn);
 
-    //al momneto de enviar el formulario, este ya no se reiniciará
+//     // Validating User Input
+//     if (title === '' || author === '' || isbn === '') {
+//       ui.renderMessage('Please fill all the fields', 'error', 3000);
+//     } else {
+//       // Pass the new book to the UI
+//       ui.addANewBook(formData);
+    ui.renderMessage('Nuevo libro agregado', 'success', 3000);
+//     }
+
     e.preventDefault();
   });
 
-  document.getElementById('books-cards')
+document.getElementById('books-cards')
   .addEventListener('click', e => {
-    const ui = new UI();
     if (e.target.classList.contains('delete')) {
+      //console.log('eliminando')
+      const ui = new UI();
       ui.deleteBook(e.target.getAttribute('_id'));
-      ui.renderMessage('Book Deleted Successfully', 'success', 3000);
+      ui.renderMessage('Libro eliminado', 'danger', 3000);
     }
     e.preventDefault();
   });
